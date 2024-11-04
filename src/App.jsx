@@ -1,41 +1,70 @@
 import React, { useState } from 'react';
-import logoImage from './images.jpeg'
-import './App.css'
-
-
-
+import logoImage from './images.jpeg';
+import './App.css';
+import Dashboard from './components/dashboard';
 
 
 function App() {
+  // State variables to hold input values
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-    // State variables to hold input values
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+  const handleLogout = () => {
+    setUsername('');
+    setPassword('');
+    setError('');
+    
+    // Perform logout logic, e.g., clear tokens, update logged-in state
+    localStorage.removeItem('authToken'); // If you're using local storage
+    setIsLoggedIn(false);
   
-    // Login function to handle form submission
-    const handleLogin = (event) => {
-      event.preventDefault(); // Prevent page reload
-  
-      // Simple validation
-      if (!username || !password) {
-        setError('Please fill out both fields');
-        return;
-      }
-  
-      // Mock authentication logic (this is where you'd make your API call)
-      if (username === 'admin' && password === 'admin') {
-        alert('Login successful!');
-        setError('');
-      } else {
-        setError('Invalid username or password');
-      }
-    };
+    console.log('Logging out...');
+    setIsLoggedIn(false); // Change login state
+  };
 
 
+  // Login function to handle form submission
+  const handleLogin = (event) => {
+    event.preventDefault(); // Prevent page reload
+
+    // Simple validation
+    if (!username || !password) {
+      setError('Please fill out both fields');
+      return;
+    }
+
+    // Mock authentication logic
+    if (username === 'admin' && password === 'admin') {
+      setIsLoggedIn(true); // Set login status
+      setError('');
+    } else {
+      setError('Invalid username or password');
+    }
+  };
+
+
+  // Logout function
+  
+    // Clear login information
+  
+
+
+// this  Space for future enhancements don't touch it without permission of Developer 
+
+
+  // Dashboard component
+
+ 
+
+
+  // Render login form or dashboard based on login status
   return (
-    <>
-  <body className="flex items-center justify-center">
+    <div className="flex items-center justify-center ">
+      {isLoggedIn ? (
+        <Dashboard handleLogout={handleLogout} />
+      ) : (
         <div className="flex w-2/3 bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="w-1/2 p-8 flex flex-col items-center">
             <h2 className="text-3xl font-bold mb-4 text-center">LOGIN</h2>
@@ -69,19 +98,19 @@ function App() {
                 </div>
               </div>
               <button
-                className="w-20 bg-blue-500 text-white py-2 rounded-md mb-4 hover-pop"
+                className="w-20 bg-blue-500 text-white py-2 rounded-md mb-4 hover:bg-blue-600"
                 type="submit"
               >
                 SIGN IN
               </button>
             </form>
 
-            <p className="text-gray-700 mb-4 text-center">Use another service to login in.</p>
+            <p className="text-gray-700 mb-4 text-center">Use another service to log in.</p>
             <div className="flex space-x-4">
-              <button className="bg-purple-800 text-white py-2 px-4 rounded-md hover-pop">
+              <button className="bg-purple-800 text-white py-2 px-4 rounded-md hover:bg-purple-700">
                 Microsoft
               </button>
-              <button className="bg-purple-800 text-white py-2 px-4 rounded-md hover-pop">
+              <button className="bg-purple-800 text-white py-2 px-4 rounded-md hover:bg-purple-700">
                 Facebook
               </button>
             </div>
@@ -97,10 +126,10 @@ function App() {
             />
           </div>
         </div>
-      </body>
-  
-    </>
-  )
-}
+      )}
+    </div>
+  );
+};
 
-export default App
+export default App;
+
