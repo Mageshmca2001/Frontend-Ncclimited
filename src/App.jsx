@@ -3,6 +3,9 @@ import logoImage from './images.jpeg';
 import './App.css';
 import Dashboard from './components/dashboard';
 
+
+
+
 function App() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -49,8 +52,10 @@ function App() {
     <div className="flex items-center justify-center ">
       {isLoggedIn ? (
         <Dashboard handleLogout={handleLogout} />
+        
       ) : (
         <div className="flex w-2/3 bg-white rounded-lg shadow-lg overflow-hidden">
+         
           <div className="w-1/2 p-8 flex flex-col items-center">
             <h2 className="text-3xl font-bold mb-4 text-center">LOGIN</h2>
             <p className="mb-6 text-gray-700 text-center">Sign in to start your session</p>
