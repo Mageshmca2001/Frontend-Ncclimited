@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logoImage from './images.jpeg';
 import './App.css';
 import Dashboard from './components/dashboard';
 
-
 function App() {
-  // State variables to hold input values
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    // Check if the user is already logged in when the component mounts
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   const handleLogout = () => {
     setUsername('');
     setPassword('');
-    setError('');
-    
-    // Perform logout logic, e.g., clear tokens, update logged-in state
-    localStorage.removeItem('authToken'); // If you're using local storage
+    setError(''); // Clear the error state on logout
+    localStorage.removeItem('authToken'); 
     setIsLoggedIn(false);
-  
     console.log('Logging out...');
-    setIsLoggedIn(false); // Change login state
   };
 
-
-  // Login function to handle form submission
   const handleLogin = (event) => {
     event.preventDefault(); // Prevent page reload
 
@@ -38,28 +38,13 @@ function App() {
     // Mock authentication logic
     if (username === 'admin' && password === 'admin') {
       setIsLoggedIn(true); // Set login status
-      setError('');
+      setError(''); // Clear any previous error
+      localStorage.setItem('authToken', 'your-auth-token'); // Store the token
     } else {
       setError('Invalid username or password');
     }
   };
 
-
-  // Logout function
-  
-    // Clear login information
-  
-
-
-// this  Space for future enhancements don't touch it without permission of Developer 
-
-
-  // Dashboard component
-
- 
-
-
-  // Render login form or dashboard based on login status
   return (
     <div className="flex items-center justify-center ">
       {isLoggedIn ? (
@@ -69,9 +54,7 @@ function App() {
           <div className="w-1/2 p-8 flex flex-col items-center">
             <h2 className="text-3xl font-bold mb-4 text-center">LOGIN</h2>
             <p className="mb-6 text-gray-700 text-center">Sign in to start your session</p>
-
             {error && <p className="text-red-500 mb-4">{error}</p>}
-
             <form className="w-full" onSubmit={handleLogin}>
               <div className="mb-4 w-full">
                 <div className="flex items-center bg-gray-200 rounded-md p-2">
@@ -104,7 +87,6 @@ function App() {
                 SIGN IN
               </button>
             </form>
-
             <p className="text-gray-700 mb-4 text-center">Use another service to log in.</p>
             <div className="flex space-x-4">
               <button className="bg-purple-800 text-white py-2 px-4 rounded-md hover:bg-purple-700">
@@ -115,7 +97,6 @@ function App() {
               </button>
             </div>
           </div>
-
           <div className="w-1/2 bg-gradient-to-r from-purple-500 to-blue-500 flex items-center justify-center">
             <img
               alt="NCC Limited logo with a colorful circular design"
@@ -129,7 +110,6 @@ function App() {
       )}
     </div>
   );
-};
+}
 
 export default App;
-
