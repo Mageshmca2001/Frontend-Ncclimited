@@ -1,11 +1,3 @@
-import React, { useState, useEffect } from 'react';
-import logoImage from './images.jpeg';
-import './App.css';
-import Dashboard from './components/dashboard';
-
-
-
-
 function App() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -117,4 +109,21 @@ function App() {
   );
 }
 
-export default App;
+
+
+
+
+
+
+import React from 'react';
+
+function Dashboard({ handleLogout }) {
+  return (
+    <div className="dashboard">
+      <h1>Welcome to the Dashboard</h1>
+      <button onClick={handleLogout}>Logout</button>
+    </div>
+  );
+}
+
+export default Dashboard;
