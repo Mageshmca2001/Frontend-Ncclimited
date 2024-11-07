@@ -1,19 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 #root {
-  max-width: 1300px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  
+  padding: 2rem;
+  text-align: center;
 }
 
 body{
   background-color:lightblue;
-  font-family: 'poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
+ 
+  
+  
 }
-  
-  
+.hover-pop:hover {
+  color: whitesmoke;
+}
 
 
 
